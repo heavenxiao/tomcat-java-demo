@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../css/date.css">
 </head>
 <body>
-<img src="../images/logo.png">
+<!-- <img src="../images/logo.png"> -->
 <div class="page-container">
             <h1 class="title"></h1>
             <div style="margin-top: 15%;">
