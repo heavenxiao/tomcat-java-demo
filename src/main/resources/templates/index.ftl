@@ -44,7 +44,7 @@
         <script src="../js/index.js"></script>
         <script type="text/javascript">
         	 $('.title').typeIt({
-           	  whatToType: "这里有很多美女，想挑哪个回家都可以!!!",
+           	  whatToType: "这里有很多美女，挑一个回家吧！",
               typeSpeed: 300,
               lifeLike: true,
               breakLines :true
