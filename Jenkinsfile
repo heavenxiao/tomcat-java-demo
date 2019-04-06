@@ -29,8 +29,7 @@ podTemplate(
       container('docker') {
           stage('Build Docker Image') {
             sh "cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}"
-            sh "docker build -t ${image_name} -f Dockerfile ./"
-            sh "echo $docker build -t ${image_name} -f Dockerfile ./"
+            sh "ls;pwd;docker build -t ${image_name} ."
             sh "docker push ${image_name}"
           }
       }
