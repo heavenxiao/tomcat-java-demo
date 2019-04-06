@@ -30,8 +30,8 @@ podTemplate(
       container('docker') {
           stage('Build Docker Image') {
             sh '''
-            cat pw.txt | docker login --username lizhenliang --password-stdin $registry
-            docker build -t ${image_name} -f Dockerfile .
+            cat pw.txt | docker login --username lizhenliang --password-stdin $registry && \
+            docker build -t ${image_name} -f Dockerfile . && \
             docker push ${image_name}
             '''
           }
