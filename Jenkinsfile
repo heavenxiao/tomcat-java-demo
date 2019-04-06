@@ -14,7 +14,7 @@ podTemplate(
 {
   node(label) {
     stage('Checkout SCM') {
-      git branch: 'master', url: 'git@github.com:lizhenliang/demo.git'
+      git branch: 'master', url: 'https://github.com/lizhenliang/demo.git'
       // 生成镜像标签，格式：commit号-更新时间
       tag = sh(returnStdout: true, script: "git rev-parse --short HEAD|tr -d '\n';echo -|tr -d '\n';date +%Y%m%d%H%M")
       project = "blog"
