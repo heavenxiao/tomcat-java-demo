@@ -15,7 +15,6 @@ podTemplate(
   node(label) {
     stage('Checkout SCM') {
       git branch: 'master', url: 'https://github.com/lizhenliang/demo'
-      // 生成镜像标签，格式：commit号-更新时间
       tag = sh(returnStdout: true, script: "git rev-parse --short HEAD|tr -d '\n';echo -|tr -d '\n';date +%Y%m%d%H%M")
       project = "blog"
       app_name = "demo"
@@ -31,6 +30,7 @@ podTemplate(
           stage('Build Docker Image') {
             sh "cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}"
             sh "docker build -t ${image_name} -f Dockerfile ./"
+            sh "echo $docker build -t ${image_name} -f Dockerfile ./"
             sh "docker push ${image_name}"
           }
       }
