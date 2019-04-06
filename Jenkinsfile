@@ -32,11 +32,14 @@ podTemplate(
       container('docker') {
           stage('Build Docker Image') {
             sh "cat /etc/issue ;hostname;echo 1${registry}/${project}/${app_name}:$tag"
-            sh "'
-            cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
-            docker build -t ${image_name} -f Dockerfile .
-            docker push ${image_name}
-            '"
+sh label: '', script: '''cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
+docker build -t ${image_name} -f Dockerfile .
+docker push ${image_name}'''
+            //sh "'
+            //cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
+            //docker build -t ${image_name} -f Dockerfile .
+            //docker push ${image_name}
+            //'"
           }
       }
     }
