@@ -30,7 +30,7 @@ podTemplate(
           stage('Build Docker Image') {
             sh "cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}"
             //sh "docker build -t ${image_name} $PWD"
-            sh "docker build -t 192.168.31.61/blog/demo:${tag} ."
+            sh "sleep 360"
             sh "docker push ${image_name}"
           }
       }
