@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 3 
+  selector:
+    matchLabels:
+      app: java-demo
+  template:
+    metadata:
+      labels:
+        app: java-demo 
+    spec:
+      containers:
+      - name: nginx
+        image: IMAGE 
+        ports:
+        - containerPort: 80
+          name: web
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: nginx
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins
+spec:
+  rules:
+  - host: java.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jenkins
+          servicePort: 80
