@@ -22,17 +22,15 @@ podTemplate(
       namespace = "default"
       registry = "192.168.31.61"
       image_name = "${registry}/${project}/${app_name}:$tag"
-            sh "cat /etc/issue ;hostname; echo 0${registry}/${project}/${app_name}:$tag"
       container('maven') {
           stage('Maven Build') {
-            sh "cat /etc/issue ;hostname;echo 1${registry}/${project}/${app_name}:$tag"
               sh 'mvn clean install -DskipTests'
           }
       }
       container('docker') {
           stage('Build Docker Image') {
             sh "cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}"
-            sh "docker build -t ${image_name} -f Dockerfile ."
+            sh "docker build -t ${image_name} -f Dockerfile ./"
             sh "docker push ${image_name}"
           }
       }
