@@ -22,8 +22,10 @@ podTemplate(
       namespace = "default"
       registry = "192.168.31.61"
       image_name = "${registry}/${project}/${app_name}:$tag"
+            sh "echo 0${registry}/${project}/${app_name}:$tag"
       container('maven') {
           stage('Maven Build') {
+            sh "echo 1${registry}/${project}/${app_name}:$tag"
               sh 'mvn clean install -DskipTests'
           }
       }
