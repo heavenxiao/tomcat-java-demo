@@ -32,6 +32,7 @@ podTemplate(
       container('docker') {
           stage('Build Docker Image') {
             sh "cat /etc/issue ;hostname;echo 1${registry}/${project}/${app_name}:$tag"
+            sh "export project tag app_name namespace registry image_name
             sh '''
             cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
             docker build -t ${image_name} -f Dockerfile .
