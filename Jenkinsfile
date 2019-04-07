@@ -31,7 +31,7 @@ podTemplate(
             sh """
             cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
             echo $PWD;ls
-            docker build -t ${image_name} $PWD
+            docker build -t ${image_name} -f /home/jenkins/Dockerfile /home/jenkins
             docker push ${image_name}
             """
           }
