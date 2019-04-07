@@ -28,14 +28,16 @@ podTemplate(
       }
       container('docker') {
           stage('Build Docker Image') {
+          withCredentials([usernamePassword(credentialsId: '74a933e5-d7cf-4369-8ef6-7b8d882b3cb7', passwordVariable: 'password', usernameVariable: 'username')]) {
             sh """
             workspace=${env.WORKSPACE}
-            ls /home/jenkins/workspace/test
+            ls /home/jenkins/workspace/test;sleep 120
+            docker login -u ${username} -p ${password} ${registry}
             docker build -t ${image_name} -f /home/jenkins/workspace/test/Dockerfile /home/jenkins/workspace/test 
             docker build -t ${image_name} -f ${workspace}/Dockerfile ${workspace} 
-            cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
             docker push ${image_name}
             """
+            }
           }
       }
     }
