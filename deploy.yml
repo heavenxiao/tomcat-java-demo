@@ -14,8 +14,8 @@ spec:
         app: java-demo 
     spec:
       containers:
-      - name: nginx
-        image: IMAGE 
+      - name: tomcat 
+        image: $IMAGE 
         ports:
         - containerPort: 80
           name: web
@@ -24,16 +24,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: web 
   labels:
-    app: nginx
+    app: java-demo
 spec:
   ports:
   - port: 80
-    name: web
-  clusterIP: None
+    name: http 
   selector:
-    app: nginx
+    app: java-demo 
 
 ---
 apiVersion: extensions/v1beta1
@@ -47,5 +46,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: jenkins
+          serviceName: web 
           servicePort: 80
