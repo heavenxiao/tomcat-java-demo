@@ -36,11 +36,10 @@ podTemplate(
             RUN rm -rf /usr/local/tomcat/webapps/*
             ADD target/*.war /usr/local/tomcat/webapps/ROOT.war 
             ' > Dockerfile
+            cat Dockerfile
 
             workspace=${env.WORKSPACE}
-            #docker login -u ${username} -p ${password} ${registry}
-            #docker build -t ${image_name} -f /home/jenkins/workspace/test/Dockerfile /home/jenkins/workspace/test 
-            cat Dockerfile
+            docker login -u ${username} -p ${password} ${registry}
             docker build -t ${image_name} . 
             docker push ${image_name}
             """
