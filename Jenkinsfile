@@ -30,7 +30,8 @@ podTemplate(
           stage('Build Docker Image') {
             sh """
             cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
-            docker build -t ${image_name} \.
+            echo $PWD
+            docker build -t ${image_name} $PWD
             docker push ${image_name}
             """
           }
