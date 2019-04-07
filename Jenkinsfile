@@ -29,9 +29,9 @@ podTemplate(
       container('docker') {
           stage('Build Docker Image') {
             sh """
+            cd ${env.WORKSPACE};echo ${env.WORKSPACE}
+            docker build -t ${image_name} . 
             cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
-            echo $PWD;ls;sleep 120
-            docker build -t ${image_name} -f /home/jenkins/Dockerfile /home/jenkins
             docker push ${image_name}
             """
           }
