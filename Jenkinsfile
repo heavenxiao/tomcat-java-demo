@@ -29,7 +29,8 @@ podTemplate(
       container('docker') {
           stage('Build Docker Image') {
             sh """
-            cd ${env.WORKSPACE} && pwd &&  ls && docker build -t ${image_name} . && pwd &&  ls 
+            workspace=${env.WORKSPACE}
+            docker build -t ${image_name} -f ${workspace}/Dockerfile ${workspace} 
             cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
             docker push ${image_name}
             """
