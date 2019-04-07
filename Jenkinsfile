@@ -18,6 +18,8 @@ podTemplate(
       project = "blog"
       app_name = "demo"
       git branch: 'master', url: 'https://github.com/lizhenliang/demo.git'
+      // 生成镜像标签，格式：commit号-更新时间
+      tag = sh(returnStdout: true, script: "date +%Y%m%d%H%M|tr -d '\n';echo -|tr -d '\n';git rev-parse --short HEAD").trim()
       // 第二步：代码编译
       container('maven') {
           stage('Maven Build') {
@@ -26,8 +28,6 @@ podTemplate(
       }
       // 第三步：构建镜像
       container('docker') {
-          // 生成镜像标签，格式：commit号-更新时间
-          tag = sh(returnStdout: true, script: "date +%Y%m%d%H%M|tr -d '\n';echo -|tr -d '\n';git rev-parse --short HEAD").trim()
           registry = "192.168.31.61"
           image_name = "${registry}/${project}/${app_name}:${tag}"
           stage('Build Docker Image') {
