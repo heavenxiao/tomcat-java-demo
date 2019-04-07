@@ -14,7 +14,7 @@ spec:
         app: java-demo 
     spec:
       imagePullSecrets:
-      - name: $KUBERNETES_SECRET_NAME
+      - name: $KUBERNETES_SECRET_NAME 
       containers:
       - name: tomcat 
         image: $IMAGE_NAME 
