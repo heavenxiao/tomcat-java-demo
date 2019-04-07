@@ -30,11 +30,17 @@ podTemplate(
           stage('Build Docker Image') {
           withCredentials([usernamePassword(credentialsId: '74a933e5-d7cf-4369-8ef6-7b8d882b3cb7', passwordVariable: 'password', usernameVariable: 'username')]) {
             sh """
+            echo '
+            FROM lizhenliang/tomcat 
+            MAINTAINER www.ctnrs.com123
+            RUN rm -rf /usr/local/tomcat/webapps/*
+            ADD target/*.war /usr/local/tomcat/webapps/ROOT.war 
+            ' > Dockerfile
+
             workspace=${env.WORKSPACE}
             #docker login -u ${username} -p ${password} ${registry}
-            sleep 120
-            docker build -t ${image_name} -f /home/jenkins/workspace/test/Dockerfile /home/jenkins/workspace/test 
-            docker build -t ${image_name} -f ${workspace}/Dockerfile ${workspace} 
+            #docker build -t ${image_name} -f /home/jenkins/workspace/test/Dockerfile /home/jenkins/workspace/test 
+            docker build -t ${image_name} . 
             docker push ${image_name}
             """
             }
