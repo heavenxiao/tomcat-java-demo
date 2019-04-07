@@ -33,6 +33,7 @@ podTemplate(
       container('docker') {
           stage('Build Docker Image') {
           withCredentials([usernamePassword(credentialsId: '74a933e5-d7cf-4369-8ef6-7b8d882b3cb7', passwordVariable: 'password', usernameVariable: 'username')]) {
+            // 创建Dockerfile并构建推送
             sh """
             echo '
               FROM lizhenliang/tomcat 
@@ -40,7 +41,7 @@ podTemplate(
               RUN rm -rf /usr/local/tomcat/webapps/*
               ADD target/*.war /usr/local/tomcat/webapps/ROOT.war 
             ' > Dockerfile
-            docker login -u ${username} -p ${password} ${registry}
+            docker login -u ${username} -p '${password}' ${registry}
             docker build -t ${image_name} .
             docker push ${image_name}
             """
