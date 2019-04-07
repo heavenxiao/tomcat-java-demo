@@ -13,9 +13,11 @@ spec:
       labels:
         app: java-demo 
     spec:
+      imagePullSecrets:
+      - name: $KUBERNETES_SECRET_NAME
       containers:
       - name: tomcat 
-        image: $IMAGE 
+        image: $IMAGE_NAME 
         ports:
         - containerPort: 80
           name: web

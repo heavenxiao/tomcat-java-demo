@@ -49,7 +49,8 @@ podTemplate(
       }
       // 第四步：部署
       stage('Deploy to Kubernetes') {
-        sh "sed -i 's#\$IMAGE#${image_name}#' deploy.yml"
+        sh "sed -i 's#\$IMAGE_NAME#${image_name}#' deploy.yml"
+        cat deploy.yml
         kubernetesDeploy configs: 'deploy.yml', 
         kubeconfigId: 'fad95334-37ee-427b-b4f0-ac11d03a2d19', 
         secretName: 'registry-pull-secret'
