@@ -38,7 +38,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: jenkins
+  name: web 
 spec:
   rules:
   - host: java.example.com

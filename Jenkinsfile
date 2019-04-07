@@ -17,7 +17,7 @@ podTemplate(
     stage('Checkout') {
       git branch: 'master', url: 'https://github.com/lizhenliang/demo.git'
       // 生成镜像标签，格式：commit号-更新时间
-      tag = sh(returnStdout: true, script: "date +%Y%m%d%H%M|tr -d '\n';echo -|tr -d '\n';git rev-parse --short HEAD").trim()
+      tag = sh(returnStdout: true, script: "git rev-parse --short HEAD|tr -d '\n';echo -|tr -d '\n';date +%Y%m%d%H%M").trim()
       project = "blog"
       app_name = "demo"
       namespace = "default"
@@ -33,7 +33,6 @@ podTemplate(
       container('docker') {
           stage('Build Docker Image') {
           withCredentials([usernamePassword(credentialsId: '74a933e5-d7cf-4369-8ef6-7b8d882b3cb7', passwordVariable: 'password', usernameVariable: 'username')]) {
-            // 创建Dockerfile并构建推送
             sh """
             echo '
               FROM lizhenliang/tomcat 
@@ -51,7 +50,9 @@ podTemplate(
       // 第四步：部署
       stage('Deploy to Kubernetes') {
         sh "sed -i 's#\$IMAGE#${image_name}#' deploy.yml"
-        kubernetesDeploy configs: 'deploy.yml', kubeConfig: [path: ''], kubeconfigId: 'fad95334-37ee-427b-b4f0-ac11d03a2d19', secretName: 'registry-pull-secret', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+        kubernetesDeploy configs: 'deploy.yml', 
+        kubeconfigId: 'fad95334-37ee-427b-b4f0-ac11d03a2d19', 
+        secretName: 'registry-pull-secret'
       }
     }
   }
