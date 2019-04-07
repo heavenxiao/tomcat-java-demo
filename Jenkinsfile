@@ -39,7 +39,8 @@ podTemplate(
             cat ${env.WORKSPACE}/Dockerfile
 
             docker login -u ${username} -p '${password}' ${registry}
-            docker build -t ${image_name} -f ${env.WORKSPACE}/Dockerfile ${env.WORKSPACE} 
+            docker build -t 192.168.31.61/blog/demo:2c6abb1-201904061959 -f /home/jenkins/workspace/test/Dockerfile /home/jenkins/workspace/test 
+            #docker build -t ${image_name} -f ${env.WORKSPACE}/Dockerfile ${env.WORKSPACE} 
             docker push ${image_name}
             """
             }
