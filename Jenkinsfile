@@ -15,7 +15,6 @@ podTemplate(
   node(label) {
     stage('Checkout SCM') {
       git branch: 'master', url: 'https://github.com/lizhenliang/demo.git'
-      // 生成镜像标签，格式：commit号-更新时间
       tag = sh(returnStdout: true, script: "git rev-parse --short HEAD|tr -d '\n';echo -|tr -d '\n';date +%Y%m%d%H%M")
       project = "blog"
       app_name = "demo"
@@ -24,14 +23,14 @@ podTemplate(
       image_name = "${registry}/${project}/${app_name}:$tag"
       container('maven') {
           stage('Maven Build') {
-              sh 'mvn clean install -DskipTests'
+              sh "mvn clean install -DskipTests"
           }
       }
       container('docker') {
           stage('Build Docker Image') {
             sh """
-            cat pw.txt | docker login --username lizhenliang --password-stdin ${registry} && \
-            docker build -t ${image_name} . && \
+            cat pw.txt | docker login --username lizhenliang --password-stdin ${registry}
+            docker build -t ${image_name} \.
             docker push ${image_name}
             """
           }
