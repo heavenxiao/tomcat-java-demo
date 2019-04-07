@@ -55,7 +55,7 @@ podTemplate(
         kubernetesDeploy configs: 'deploy.yml', 
         kubeconfigId: 'fad95334-37ee-427b-b4f0-ac11d03a2d19', 
         secretName: 'registry-pull-secret'
-        //sh "echo $KUBERNETES_SECRET_NAME"
+        sh "echo $KUBERNETES_SECRET_NAME"
       }
     }
   }
