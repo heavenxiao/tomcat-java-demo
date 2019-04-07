@@ -38,8 +38,8 @@ podTemplate(
             ' > Dockerfile
             cat ${env.WORKSPACE}/Dockerfile
 
+            docker login -u ${username} -p '${password}' ${registry}
             docker build -t ${image_name} . 
-            docker login -u ${username} -p ${password} ${registry}
             docker push ${image_name}
             """
             }
