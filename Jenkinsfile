@@ -31,8 +31,9 @@ podTemplate(
           withCredentials([usernamePassword(credentialsId: '74a933e5-d7cf-4369-8ef6-7b8d882b3cb7', passwordVariable: 'password', usernameVariable: 'username')]) {
             sh """
             workspace=${env.WORKSPACE}
-            ls /home/jenkins/workspace/test;sleep 120
+            ls /home/jenkins/workspace/test
             docker login -u ${username} -p ${password} ${registry}
+            sleep 120
             docker build -t ${image_name} -f /home/jenkins/workspace/test/Dockerfile /home/jenkins/workspace/test 
             docker build -t ${image_name} -f ${workspace}/Dockerfile ${workspace} 
             docker push ${image_name}
