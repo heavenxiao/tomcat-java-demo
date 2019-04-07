@@ -15,7 +15,7 @@ podTemplate(
   node(label) {
     stage('Checkout SCM') {
       git branch: 'master', url: 'https://github.com/lizhenliang/demo.git'
-      tag = sh(returnStdout: true, script: "git rev-parse --short HEAD|tr -d '\n';echo -|tr -d '\n';date +%Y%m%d%H%M")
+      tag = sh(returnStdout: true, script: "git rev-parse --short HEAD|tr -d '\n';echo -|tr -d '\n';date +%Y%m%d%H%M|tr -d '\n'")
       project = "blog"
       app_name = "demo"
       namespace = "default"
@@ -39,8 +39,7 @@ podTemplate(
             cat ${env.WORKSPACE}/Dockerfile
 
             docker login -u ${username} -p '${password}' ${registry}
-            docker build -t 192.168.31.61/blog/demo:2c6abb1-201904061959 -f /home/jenkins/workspace/test/Dockerfile /home/jenkins/workspace/test 
-            #docker build -t ${image_name} -f ${env.WORKSPACE}/Dockerfile ${env.WORKSPACE} 
+            docker build -t ${image_name} . 
             docker push ${image_name}
             """
             }
