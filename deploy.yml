@@ -27,15 +27,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web 
-  labels:
-    app: java-demo
+  name: web
 spec:
-  ports:
-  - port: 80
-    name: http 
   selector:
     app: java-demo 
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
 
 ---
 apiVersion: extensions/v1beta1
