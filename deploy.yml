@@ -20,7 +20,7 @@ spec:
       - name: tomcat 
         image: $IMAGE_NAME 
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           name: web
 
 ---
