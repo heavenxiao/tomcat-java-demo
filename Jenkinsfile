@@ -1,17 +1,16 @@
 
 // 公共
 def registry = "10.206.240.188"
-def git = "10.206.240.189"
 // 项目
 def project = "project"
 def app_name = "demo"
-def image_name = "${registry}/${project}/${app_name}"
-def git_address = "git@${git}:/home/git/solo.git"
+def image_name = "${registry}/${project}/${app_name}:${BUILD_NUMBER}"
+def git_address = "git@10.206.240.189:/home/git/demo.git"
 // 认证
 def secret_name = "registry-pull-secret"
-def docker_registry_auth = "75df606e-e706-4749-a21c-86df7ed4b5b2"
-def git_auth = "75df606e-e706-4749-a21c-86df7ed4b5b2"
-def k8s_auth = "9f15ff8f-c5e4-4523-8bfe-cc02d921984a"
+def docker_registry_auth = "f192bf8b-acb9-4561-a914-50b2c884393c"
+def git_auth = "e120e48b-3846-46e9-9401-8e7482c8eee5"
+def k8s_auth = "cfa44e97-6ae7-45ba-b1d1-4f927f928f80"
 
 podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
     containerTemplate(
@@ -28,7 +27,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
   node("jenkins-slave"){
       // 第一步
       stage('拉取代码'){
-         checkout([$class: 'GitSCM', branches: [[name: '${Tag}']], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_address}"]]])
+         checkout([$class: 'GitSCM', branches: [[name: '${Branch}']], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_address}"]]])
       }
       // 第二步
       stage('代码编译'){
@@ -59,3 +58,5 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
       }
   }
 }
+
+
