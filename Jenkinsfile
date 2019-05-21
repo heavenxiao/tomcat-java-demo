@@ -8,9 +8,9 @@ def image_name = "${registry}/${project}/${app_name}:${BUILD_NUMBER}"
 def git_address = "git@10.206.240.189:/home/git/demo.git"
 // 认证
 def secret_name = "registry-pull-secret"
-def docker_registry_auth = "f192bf8b-acb9-4561-a914-50b2c884393c"
-def git_auth = "e120e48b-3846-46e9-9401-8e7482c8eee5"
-def k8s_auth = "cfa44e97-6ae7-45ba-b1d1-4f927f928f80"
+def docker_registry_auth = "881f76f7-ea94-4397-8006-23c300feae9a"
+def git_auth = "b3e33c8b-c7e0-47b9-baee-d7629d71f154"
+def k8s_auth = "854ae16f-dfa2-46ee-a214-a4c4aed0768e"
 
 podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
     containerTemplate(
