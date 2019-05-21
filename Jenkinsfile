@@ -15,7 +15,7 @@ def k8s_auth = "854ae16f-dfa2-46ee-a214-a4c4aed0768e"
 podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
     containerTemplate(
         name: 'jnlp', 
-        image: '10.206.240.188/library/jenkins-slave-jdk:1.8'
+        image: "${registry}/library/jenkins-slave-jdk:1.8"
     ),
   ],
   volumes: [
