@@ -2,7 +2,7 @@
 // 公共
 def registry = "192.168.31.64"
 // 项目
-def project = "project"
+def project = "welcome"
 def app_name = "demo"
 def image_name = "${registry}/${project}/${app_name}:${BUILD_NUMBER}"
 def git_address = "git@192.168.31.64:/home/git/java-demo.git"
