@@ -31,6 +31,7 @@
   position: relative;
   display: inline;
   font-size: inherit;
+  color: white;
 }
 
 .ti-text-container:before {
