@@ -14,8 +14,8 @@
 			 <table id="userList" lay-filter="user-filter"></table>
 			 <!-- 底部固定区域 -->
 			 <div class="layui-footer">
-			     &nbsp;&nbsp;&nbsp;-说明：
-			    1、后宫佳丽很多很多。士为知己者死，女为悦己者容
+			     &nbsp;&nbsp;&nbsp;
+                          后宫佳丽三千人，三千宠爱在一身。
 	      </div>
       </div>
       <!-- 操作列的标签-->
