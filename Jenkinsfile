@@ -1,11 +1,11 @@
 
 // 公共
-def registry = "10.206.240.188"
+def registry = "192.168.31.64"
 // 项目
 def project = "project"
 def app_name = "demo"
 def image_name = "${registry}/${project}/${app_name}:${BUILD_NUMBER}"
-def git_address = "git@10.206.240.189:/home/git/demo.git"
+def git_address = "git@192.168.31.64:/home/git/java-demo.git"
 // 认证
 def secret_name = "registry-pull-secret"
 def docker_registry_auth = "881f76f7-ea94-4397-8006-23c300feae9a"
